@@ -1,0 +1,28 @@
+repos:
+  - repo: https://github.com/zubanls/zuban-pre-commit
+    rev: v0.10.0
+    hooks:
+      # Run `zuban check`
+      - id: zuban
+        args: [--pretty]  # optional
+
+      # Run `zuban mypy`
+      - id: zmypy
+        args: [--warn-unreachable]  # optional
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.16.6
+    hooks:
+      - id: ruff
+      - id: ruff-format
+  - repo: https://github.com/astral-sh/uv-pre-commit
+    rev: 0.12.10
+    hooks:
+      - id: uv-lock
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v6.0.0
+    hooks:
+      - id: check-merge-conflict
+      - id: debug-statements
+      - id: fix-byte-order-marker
+      - id: trailing-whitespace
+      - id: end-of-file-fixer

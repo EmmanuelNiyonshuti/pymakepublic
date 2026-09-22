@@ -1,0 +1,113 @@
+[build-system]
+requires = ["flit_core >=3.11,<5"]
+build-backend = "flit_core.buildapi"
+
+[project]
+name = "pymakepublic"
+version = "0.1.0"
+license = "MIT"
+license-files = ["LICEN[CS]E*"]
+authors = [{ name = "NIYONSHUTI Emmanuel", email = "emmanuelniyonshuti13@gmail.com" }]
+description="a python library for explicitly marking your public APIs with `@pub`."
+readme = "README.md"
+requires-python = ">=3.10"
+
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Topic :: Software Development :: Build Tools",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "Programming Language :: Python :: 3.15",
+    "Typing :: Typed",
+]
+
+dependencies = []
+
+[project.urls]
+Documentation = "https://github.com/EmmanuelNiyonshuti/pymakepublic"
+Source = "https://github.com/EmmanuelNiyonshuti/pymakepublic"
+
+[project.optional-dependencies]
+
+[dependency-groups]
+dev = [
+    "ruff",
+    "tox",
+    "tox-uv",
+]
+tests = [
+    "pytest"
+]
+typing = [
+    "zuban"
+]
+
+[tool.uv]
+default-groups = ["dev", "tests", "typing"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.coverage.run]
+branch = true
+source = ["pymakepublic", "tests"]
+
+[tool.coverage.paths]
+source = ["src", "*/site-packages"]
+
+[tool.zuban]
+strict = true
+disallow_untyped_defs = true
+warn_unreachable = true
+allow_untyped_globals = false
+check_untyped_defs = false
+follow_untyped_imports = true
+exclude_gitignore = true
+
+[tool.ruff]
+src = ["src"]
+fix = true
+show-fixes = true
+output-format = "full"
+
+[tool.ruff.lint]
+select = [
+    "B",  # flake8-bugbear
+    "E",  # pycodestyle error
+    "F",  # pyflakes
+    "FA",  # flake8-future-annotations
+    "I",  # isort
+    "N",  # pep8-naming
+    "UP",  # pyupgrade
+    "W",  # pycodestyle warning
+]
+
+[tool.ruff.lint.isort]
+force-single-line = true
+order-by-type = false
+
+[tool.tox]
+env_list = [
+    "py3.15", "py3.14", "py3.13", "py3.12", "py3.11", "py3.10",
+    "style",
+    "typing",
+    "docs",
+]
+
+[tool.tox.env_run_base]
+description = "pytest on latest dependency versions"
+runner = "uv-venv-lock-runner"
+package = "wheel"
+wheel_build_env = ".pkg"
+constrain_package_deps = true
+use_frozen_constraints = true
+dependency_groups = ["tests", "dev"]
+commands = [[
+    "pytest", "-v", "--tb=short", "--basetemp={env_tmp_dir}", "--cov=anyquart",
+    {replace = "posargs", default = [], extend = true},
+]]
