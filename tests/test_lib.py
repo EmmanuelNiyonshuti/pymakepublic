@@ -16,6 +16,9 @@ def import_temp_module(tmp_path: Path, source: str) -> ModuleType:
     test_file.write_text(textwrap.dedent(source))
 
     spec = importlib.util.spec_from_file_location(file_name, test_file)
+    assert spec is not None and spec.loader is not None, (
+        f"could not build an import spec for {test_file}"
+    )
     module = importlib.util.module_from_spec(spec)
     sys.modules[file_name] = module
     try:
