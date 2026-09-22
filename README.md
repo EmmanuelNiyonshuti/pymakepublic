@@ -5,8 +5,8 @@ This is rather a tiny library that allows you to explicitly mark your public Pyt
 This isn't necessarily [PEP 844](https://peps.python.org/pep-0844/), though it's the same idea. This library leaves classes and functions that are not explicitly marked with `@pub` alone (assuming they are supposedly private), and you may normally underscore them to indicate they are private APIs. Note that in Python you can still import those so-called private APIs, so this library doesn't make an exception on that.
 
 [![Tests](https://github.com/EmmanuelNiyonshuti/pymakepublic/actions/workflows/test.yml/badge.svg)](https://github.com/EmmanuelNiyonshuti/pymakepublic/actions)
-[![PyPI](https://img.shields.io/pypi/v/pymakepublic.svg)](https://pypi.org/project/pymakepublic/)
-[![Python](https://img.shields.io/pypi/pyversions/pymakepublic.svg)](https://pypi.org/project/pymakepublic/)
+[![PyPI](https://img.shields.io/pypi/v/pymakepublic)](https://pypi.org/project/pymakepublic/)
+[![Python](https://img.shields.io/pypi/pyversions/pymakepublic)](https://pypi.org/project/pymakepublic/)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 ![t](https://img.shields.io/badge/status-maintained-yellow.svg)
 
@@ -20,13 +20,17 @@ $ pip install pymakepublic
 # m.py
 from pymakepublic import pub
 
+
 @pub
 class Foo: ...
 
+
 class Bar: ...
+
 
 @pub
 def bar(): ...
+
 
 def do_something(): ...
 ```
