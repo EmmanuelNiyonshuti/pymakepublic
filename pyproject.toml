@@ -4,7 +4,7 @@ build-backend = "flit_core.buildapi"
 
 [project]
 name = "pymakepublic"
-version = "0.1.0"
+version = "0.2.0"
 license = "MIT"
 license-files = ["LICEN[CS]E*"]
 authors = [{ name = "NIYONSHUTI Emmanuel", email = "emmanuelniyonshuti13@gmail.com" }]
